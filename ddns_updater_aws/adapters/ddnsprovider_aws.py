@@ -10,7 +10,7 @@ def update_dns(ip, config):
     found = False
     for record_set in _get_record_sets(config['zone_id'], config):
         if record_set.name == config['record_set_name']:
-            record_set.values = ip
+            record_set.records = [str(ip)]
             record_set.save()
             found = True
             break

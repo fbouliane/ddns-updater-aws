@@ -45,7 +45,7 @@ class TestUpdateDns(TestCase):
 
         self.assertTrue(self.route53_mock.called)
         connection_mock.get_hosted_zone_by_id.assert_called_with("AWS_ZONE")
-        self.assertEqual("192.0.2.10", rrset_mock.values)
+        self.assertEqual("192.0.2.10", rrset_mock.records[0])
         self.assertTrue(rrset_mock.save.called)
 
 
