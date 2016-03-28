@@ -25,9 +25,9 @@ from step 2-4 to setup your amazon server. The recovered values should be added 
 
 ## Usage
 
-0. Copy and edit the `ddns_aws_updater/ddns_aws_updater.default.ini` to `ddns_aws_updater.ini`
-0. Install the requirements `pip install -r requirements.txt`
-0. Execute the software (*python style* `python -m ddns_aws_updater`, *bash style* `ddns_aws_updater/__main__.py`)
+0. Copy and edit the `ddns_updater_aws/ddns_updater_aws.default.ini` to `ddns_updater_aws/ddns_updater_aws.ini`
+0. Install the requirements `python setup.py install`
+0. Execute the software (*python style* `python -m ddns_updater_aws`, *bash style* `ddns_updater_aws/__main__.py`)
 
 *The script only updates once the IP, it's intended usage is to launch the script at an interval by something like a cron job.*
 

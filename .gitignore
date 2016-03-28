@@ -2,7 +2,7 @@
 # Created by https://www.gitignore.io/api/python
 
 #config_file
-ddns_aws_updater/ddns_aws_updater.ini
+ddns_updater_aws/ddns_updater_aws.ini
 MANIFEST
 
 ### Python ###

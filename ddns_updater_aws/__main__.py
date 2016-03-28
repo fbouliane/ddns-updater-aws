@@ -19,7 +19,7 @@ class DdnsUpdater(object):
         self._config_provider = config_provider
         if not config_provider:
             try:
-                self._config_provider = Config(os.path.join(os.path.dirname(__file__), "ddns_aws_updater.ini"))
+                self._config_provider = Config(os.path.join(os.path.dirname(__file__), "ddns_updater_aws.ini"))
             except IOError as e:
                 logger.exception(e)
                 logger.error("Unable to load config file")
@@ -40,8 +40,13 @@ class DdnsUpdater(object):
             logger.exception(e)
             logger.error("Could not update dns: {}".format(e.message))
 
-if __name__ == "__main__":
+
+def main():
     logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
     logging.getLogger().setLevel(logging.INFO)
     ddns_updater = DdnsUpdater()
     ddns_updater.run()
+    
+    
+if __name__ == "__main__":
+    main()

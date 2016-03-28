@@ -1,8 +1,8 @@
 from unittest import TestCase
 
 import ipaddress
-from ddns_aws_updater.adapters import IpProviderFailure
-from ddns_aws_updater.adapters.ipprovider_opendns import get_ip_address
+from ddns_updater_aws.adapters import IpProviderFailure
+from ddns_updater_aws.adapters.ipprovider_opendns import get_ip_address
 from mock import patch, MagicMock, Mock
 
 

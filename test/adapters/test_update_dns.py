@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from ddns_aws_updater.adapters.ddnsprovider_aws import update_dns
-from ddns_aws_updater.__main__ import UpdateDnsFailed
+from ddns_updater_aws.adapters.ddnsprovider_aws import update_dns
+from ddns_updater_aws.__main__ import UpdateDnsFailed
 from flexmock import flexmock
 from mock import patch, Mock
 
@@ -12,7 +12,7 @@ class TestUpdateDns(TestCase):
         self.route53_mock = self._patcher.start()
         self.route53_mock.return_value = self.connection_mock = Mock()
 
-        self._logmockpatcher = patch('ddns_aws_updater.adapters.ddnsprovider_aws.logger', flexmock())
+        self._logmockpatcher = patch('ddns_updater_aws.adapters.ddnsprovider_aws.logger', flexmock())
         self.logmock = self._logmockpatcher.start()
 
     def tearDown(self):

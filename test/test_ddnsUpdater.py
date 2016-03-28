@@ -1,8 +1,8 @@
 from unittest import TestCase
 
 import ipaddress
-from ddns_aws_updater.adapters import IpProviderFailure, UpdateDnsFailed
-from ddns_aws_updater.__main__ import DdnsUpdater
+from ddns_updater_aws.adapters import IpProviderFailure, UpdateDnsFailed
+from ddns_updater_aws.__main__ import DdnsUpdater
 from flexmock import flexmock
 from mock import Mock, patch
 
@@ -14,13 +14,13 @@ class TestDdnsUpdater(TestCase):
         self.ddns_provider_mock = Mock()
         self.config_mock = Mock()
 
-        self.logpatcher = patch('ddns_aws_updater.__main__.logger', flexmock())
+        self.logpatcher = patch('ddns_updater_aws.__main__.logger', flexmock())
         self.logmock = self.logpatcher.start()
 
     def tearDown(self):
         self.logpatcher.stop()
 
-    @patch("ddns_aws_updater.__main__.Config")
+    @patch("ddns_updater_aws.__main__.Config")
     def test_no_config_file(self, config_mock):
         config_mock.side_effect = err = IOError("file not found")
 
