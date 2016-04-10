@@ -42,7 +42,7 @@ class DdnsUpdater(object):
             logger.error("Could not update dns: {}".format(e.message))
 
 
-def main():
+def main():  # pragma: no cover
     formatter = logging.Formatter('%(asctime)s - %(message)s')
     handler = logging.StreamHandler(sys.stdout)
     handler.setFormatter(formatter)
