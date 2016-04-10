@@ -52,5 +52,5 @@ def main():  # pragma: no cover
     ddns_updater.run()
     
     
-if __name__ == "__main__":
+if __name__ == "__main__":   # pragma: no cover
     main()
