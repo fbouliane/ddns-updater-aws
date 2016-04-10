@@ -1,4 +1,8 @@
 # DDNS updater for AWS
+[![Build
+Status](https://travis-ci.org/fbouliane/ddns-updater-aws.svg?branch=master)](https://travis-ci.org/fbouliane/ddns-updater-aws)
+
+
 This script keeps a domain name pointing *server.yourdomain.com* to your ip address using Amazon's route53 api. It can be useful something like a home server or a raspberry pi, or anything that could execute python.
 
 *This script could be a replacement for no-ip, dyn or duck dns services if executed often.*
