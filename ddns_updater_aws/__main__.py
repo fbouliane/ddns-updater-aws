@@ -25,8 +25,9 @@ class DdnsUpdater(object):
 
     def run(self):
         logger.info("Discovering ip address...")
+        ipprovider_config = self._config_provider.get_opendns_config()
         try:
-            ip = self._ip_address_provider()
+            ip = self._ip_address_provider(ipprovider_config)
         except IpProviderFailure:
             logger.error("no IP address was discovered")
             return

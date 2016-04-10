@@ -12,3 +12,7 @@ class Config(object):
 
     def get_aws_config(self):
         return self.config["ddns_provider_aws"]
+
+    def get_opendns_config(self):
+        if 'ip_provider_opendns' in self.config.sections():
+            return self.config['ip_provider_opendns']
