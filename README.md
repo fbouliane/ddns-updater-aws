@@ -1,5 +1,5 @@
 # DDNS updater for AWS
-This script keeps a domain name pointing *server.yourdomain.com* to your ip address using Amazon's route53 api. It can be useful something like a home server or a raspberry pi, or anything that could execute python. 
+This script keeps a domain name pointing *server.yourdomain.com* to your ip address using Amazon's route53 api. It can be useful something like a home server or a raspberry pi, or anything that could execute python.
 
 *This script could be a replacement for no-ip, dyn or duck dns services if executed often.*
 
@@ -35,6 +35,11 @@ from step 2-4 to setup your amazon server. The recovered values should be added 
 only tested on ubuntu 12.04, should work on other platforms however.
 
 `tox -r`
+
+# Limitations
+This script does not save your current IP, in other words, EVERYTIME a call is made to this script it post the new IP to Amazon route53.
+
+This script currently does not support IPV6 (AAAA record). See section below.
 
 ## Contributions
 Opening a pull-request or an issue is encouraged !
