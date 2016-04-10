@@ -22,15 +22,15 @@ class TestDdnsUpdater(TestCase):
 
     @patch("ddns_updater_aws.__main__.Config")
     def test_no_config_file(self, config_mock):
-        config_mock.side_effect = err = IOError("file not found")
+        config_mock.side_effect = IOError("file not found")
 
-        self.logmock.should_receive('exception').with_args(err).once()
-        self.logmock.should_receive('error').with_args('Unable to load config file').once().ordered()
+        self.logmock.should_receive('exception').with_args('Unable to load config file').once().ordered()
 
         DdnsUpdater(self.ip_provider_mock, self.ddns_provider_mock)
 
     def test_run(self):
         self.config_mock.get_aws_config.return_value = {}
+        self.logmock.should_receive('info').with_args('Discovering ip address...').once.ordered()
         self.logmock.should_receive('info').with_args('ip [192.0.2.10] was discovered, sending to ddns provider ...').once().ordered()
         self.logmock.should_receive('info').with_args('ddns provider updated !').once().ordered()
         updater = DdnsUpdater(self.ip_provider_mock, self.ddns_provider_mock, self.config_mock)
@@ -42,6 +42,7 @@ class TestDdnsUpdater(TestCase):
 
     def test_with_failing_ddns_provider(self):
         self.ddns_provider_mock.side_effect = error = UpdateDnsFailed("test")
+        self.logmock.should_receive('info').with_args('Discovering ip address...').once.ordered()
         self.logmock.should_receive('info').with_args('ip [192.0.2.10] was discovered, sending to ddns provider ...').once().ordered()
         self.logmock.should_receive('exception').with_args(error).once().ordered()
         self.logmock.should_receive('error').with_args('Could not update dns: test').once().ordered()
@@ -51,6 +52,7 @@ class TestDdnsUpdater(TestCase):
         updater.run()
 
     def test_with_failing_ip_provider(self):
+        self.logmock.should_receive('info').with_args('Discovering ip address...').once.ordered()
         self.logmock.should_receive('error').with_args('no IP address was discovered').once().ordered()
         updater = DdnsUpdater(Mock(side_effect=IpProviderFailure()), self.ddns_provider_mock, self.config_mock)
 

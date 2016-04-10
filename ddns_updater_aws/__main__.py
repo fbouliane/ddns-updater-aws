@@ -21,10 +21,10 @@ class DdnsUpdater(object):
             try:
                 self._config_provider = Config(os.path.join(os.path.dirname(__file__), "ddns_updater_aws.ini"))
             except IOError as e:
-                logger.exception(e)
-                logger.error("Unable to load config file")
+                logger.exception("Unable to load config file")
 
     def run(self):
+        logger.info("Discovering ip address...")
         try:
             ip = self._ip_address_provider()
         except IpProviderFailure:
@@ -42,7 +42,10 @@ class DdnsUpdater(object):
 
 
 def main():
-    logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
+    formatter = logging.Formatter('%(asctime)s - %(message)s')
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(formatter)
+    logging.getLogger().addHandler(handler)
     logging.getLogger().setLevel(logging.INFO)
     ddns_updater = DdnsUpdater()
     ddns_updater.run()
