@@ -4,5 +4,10 @@ env:
  - TOX_ENV=py27
 install:
  - pip install tox
+ - pip install coveralls
+
 script:
  - tox -e $TOX_ENV
+ - tox -e coverage
+after_success:
+  coveralls
