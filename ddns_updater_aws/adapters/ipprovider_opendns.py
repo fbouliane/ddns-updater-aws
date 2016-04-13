@@ -1,7 +1,6 @@
 import dns.resolver
 import ipaddress
 from . import IpProviderFailure
-import netifaces
 
 
 def get_ip_address(config=None):
@@ -20,7 +19,9 @@ def get_ip_address(config=None):
         raise IpProviderFailure("Unable to get ip address")
 
 
-def _get_ip_address_from_interface_name(interface_name):
+# this method is untested to prevent requiring netifaces that requires python-dev
+def _get_ip_address_from_interface_name(interface_name):  # pragma: no cover
+    import netifaces
     addrs = netifaces.ifaddresses(interface_name)
     return unicode(addrs[netifaces.AF_INET][0]['addr'], "utf-8")
 

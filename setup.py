@@ -21,8 +21,7 @@ setup(name='ddns_updater_aws',
         'dnspython>=1.12.0,<2.0',
         'ipaddress>=1.0.16,<2.0',
         'route53>=1.0,<2.0',
-        'configparser>=3.3,<4.0',
-        'netifaces>=0.10.4,<0.11.0'
+        'configparser>=3.3,<4.0'
       ],
       entry_points={
         'console_scripts': [

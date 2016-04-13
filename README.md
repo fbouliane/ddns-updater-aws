@@ -37,6 +37,16 @@ from step 2-4 to setup your amazon server. The recovered values should be added 
 
 *The script only updates once the IP, it's intended usage is to launch the script at an interval by something like a cron job.*
 
+### Specify interface for dns query
+
+This setting is used to ensure dns query starts from specified interface. It resolves the specified interface ip to pass it to the dns query. It can be useful when network magic need to happen (in my case, bypassing a vpn, using specified non-default interface)
+
+To use this feature, some additionnals install are required. Those were ommited due to netifaces requiring `python-dev`not present by default on linux.
+
+`sudo apt-get install python-dev # install python header on linux`
+
+`pip install 'netifaces>=0.10.4,<0.11.0' # install netifaces`
+
 ## Tests
 only tested on ubuntu 12.04, should work on other platforms however.
 
