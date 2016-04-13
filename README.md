@@ -28,24 +28,13 @@ Those are the reason why I invested time to create this project.
 Please follow [these instruction](https://willwarren.com/2014/07/03/roll-dynamic-dns-service-using-amazon-route53/#step-2-set-up-your-hosted-zone-on-route53:bef5789d633e223574fb4cc7b8ade916)
 from step 2-4 to setup your amazon server. The recovered values should be added to your ddns_aws_updater.ini
 
-
 ## Usage
 
 0. Copy and edit the `ddns_updater_aws/ddns_updater_aws.default.ini` to `ddns_updater_aws/ddns_updater_aws.ini`
 0. Install the requirements `python setup.py install`
 0. Execute the software (*python style* `python -m ddns_updater_aws`, *bash style* `ddns_updater_aws/__main__.py`)
 
-*The script only updates once the IP, it's intended usage is to launch the script at an interval by something like a cron job.*
-
-### Specify interface for dns query
-
-This setting is used to ensure dns query starts from specified interface. It resolves the specified interface ip to pass it to the dns query. It can be useful when network magic need to happen (in my case, bypassing a vpn, using specified non-default interface)
-
-To use this feature, some additionnals install are required. Those were ommited due to netifaces requiring `python-dev`not present by default on linux.
-
-`sudo apt-get install python-dev # install python header on linux`
-
-`pip install 'netifaces>=0.10.4,<0.11.0' # install netifaces`
+*The script only updates once the IP, it's intended usage is to launch the script at an interval by something like a cron job. see [Advanced usage](Advanced.md)*
 
 ## Tests
 only tested on ubuntu 12.04, should work on other platforms however.
@@ -53,9 +42,10 @@ only tested on ubuntu 12.04, should work on other platforms however.
 `tox -r`
 
 # Limitations
-This script does not save your current IP, in other words, EVERYTIME a call is made to this script it post the new IP to Amazon route53.
 
-This script currently does not support IPV6 (AAAA record). See section below.
+* This script does not save your current IP, in other words, EVERYTIME a call is made to this script it post the new IP to Amazon route53.
+* This script currently does not support IPV6 (AAAA record). See section below.
+* Additionnal requirements for using specific interface, see [Advanced usage](Advanced.md) for details
 
 ## Contributions
 Opening a pull-request or an issue is encouraged !
