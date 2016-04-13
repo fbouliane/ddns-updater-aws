@@ -1,6 +1,7 @@
 import dns.resolver
 import ipaddress
 from . import IpProviderFailure
+import netifaces
 
 
 def get_ip_address(config=None):
@@ -8,10 +9,18 @@ def get_ip_address(config=None):
     resolver = dns.resolver.Resolver(configure=False)
     resolver.nameservers = [resolver_ip]
 
-    source_port = 0
+    opt = {}
     if config:
-        source_port = int(config.get('source_port', 0))
+        opt['source_port'] = int(config.get('source_port', 0))
+        if config.get("interface_name"):
+            opt['source'] = _get_ip_address_from_interface_name(config['interface_name'])
     try:
-        return ipaddress.ip_address(resolver.query('myip.opendns.com', source_port=source_port)[0])
+        return ipaddress.ip_address(resolver.query('myip.opendns.com', **opt)[0])
     except ValueError:
         raise IpProviderFailure("Unable to get ip address")
+
+
+def _get_ip_address_from_interface_name(interface_name):
+    addrs = netifaces.ifaddresses(interface_name)
+    return unicode(addrs[netifaces.AF_INET][0]['addr'], "utf-8")
+
